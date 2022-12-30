@@ -3,10 +3,10 @@ package com.example.hero_datasource.network
 import com.example.hero_datasource.network.EndPoints.BASE_URL
 import com.example.hero_domain.*
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class HeroDto(
-    
 
 @SerialName("id")
 val id: Int,

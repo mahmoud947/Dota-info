@@ -1,3 +1,3 @@
 object KotlinPlugins {
-    const val serialization = "plugin.serialization"
+    const val serialization = "org.jetbrains.kotlin.plugin.serialization"
 }
