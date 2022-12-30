@@ -8,7 +8,9 @@ java {
     targetCompatibility JavaVersion.VERSION_1_7
 }
 dependencies {
-    implementation Retrofit.retrofit
-    implementation Gson.gson
+    implementation Ktor.core
+    implementation Ktor.clientSerialization
+    implementation Ktor.android
+
     implementation project(Modules.heroDomain)
 }

@@ -2,150 +2,151 @@ package com.example.hero_datasource.network
 
 import com.example.hero_datasource.network.EndPoints.BASE_URL
 import com.example.hero_domain.*
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+
 
 data class HeroDto(
     
 
-@SerializedName("id")
+@SerialName("id")
 val id: Int,
 
-@SerializedName("localized_name")
+@SerialName("localized_name")
 val localizedName: String,
 
-@SerializedName("primary_attr")
+@SerialName("primary_attr")
 val primaryAttribute: String,
 
-@SerializedName("attack_type")
+@SerialName("attack_type")
 val attackType: String,
 
-@SerializedName("roles")
+@SerialName("roles")
 val roles: List<String>,
 
-@SerializedName("img")
+@SerialName("img")
 val img: String,
 
-@SerializedName("icon")
+@SerialName("icon")
 val icon: String,
 
-@SerializedName("base_health")
+@SerialName("base_health")
 val baseHealth: Float,
 
-@SerializedName("base_health_regen")
+@SerialName("base_health_regen")
 val baseHealthRegen: Float?,
 
-@SerializedName("base_mana")
+@SerialName("base_mana")
 val baseMana: Float,
 
-@SerializedName("base_mana_regen")
+@SerialName("base_mana_regen")
 val baseManaRegen: Float?,
 
-@SerializedName("base_armor")
+@SerialName("base_armor")
 val baseArmor: Float,
 
-@SerializedName("base_mr")
+@SerialName("base_mr")
 val baseMoveRate: Float,
 
-@SerializedName("base_attack_min")
+@SerialName("base_attack_min")
 val baseAttackMin: Int,
 
-@SerializedName("base_attack_max")
+@SerialName("base_attack_max")
 val baseAttackMax: Int,
 
-@SerializedName("base_str")
+@SerialName("base_str")
 val baseStr: Int,
 
-@SerializedName("base_agi")
+@SerialName("base_agi")
 val baseAgi: Int,
 
-@SerializedName("base_int")
+@SerialName("base_int")
 val baseInt: Int,
 
-@SerializedName("str_gain")
+@SerialName("str_gain")
 val strGain: Float, // Strength gain per lvl
 
-@SerializedName("agi_gain")
+@SerialName("agi_gain")
 val agiGain: Float, // Agility gain per lvl
 
-@SerializedName("int_gain")
+@SerialName("int_gain")
 val intGain: Float, // Intelligence gain per lvl
 
-@SerializedName("attack_range")
+@SerialName("attack_range")
 val attackRange: Int,
 
-@SerializedName("projectile_speed")
+@SerialName("projectile_speed")
 val projectileSpeed: Int,
 
-@SerializedName("attack_rate")
+@SerialName("attack_rate")
 val attackRate: Float,
 
-@SerializedName("move_speed")
+@SerialName("move_speed")
 val moveSpeed: Int,
 
-@SerializedName("turn_rate")
+@SerialName("turn_rate")
 val turnRate: Float? = 0F,
 
-@SerializedName("legs")
+@SerialName("legs")
 val legs: Int, // How many legs does this hero have?
 
-@SerializedName("turbo_picks")
+@SerialName("turbo_picks")
 val turboPicks: Int, // How many times picked for turbo matches?
 
-@SerializedName("turbo_wins")
+@SerialName("turbo_wins")
 val turboWins: Int, // How many times won a turbo match?
 
-@SerializedName("pro_win")
+@SerialName("pro_win")
 val proWins: Int? = 0, // How many times won a pro match?
 
-@SerializedName("pro_pick")
+@SerialName("pro_pick")
 val proPick: Int? = 0, // How many times picked in pro match?
 
-@SerializedName("1_pick")
+@SerialName("1_pick")
 val firstPick: Int, // How many times picked first?
 
-@SerializedName("1_win")
+@SerialName("1_win")
 val firstWin: Int, // How many times picked first and won?
 
-@SerializedName("2_pick")
+@SerialName("2_pick")
 val secondPick: Int, // How many times picked second?
 
-@SerializedName("2_win")
+@SerialName("2_win")
 val secondWin: Int, // How many times picked second and won?
 
-@SerializedName("3_pick")
+@SerialName("3_pick")
 val thirdPick: Int, // How many times picked third?
 
-@SerializedName("3_win")
+@SerialName("3_win")
 val thirdWin: Int, // How many times picked third and won?
 
-@SerializedName("4_pick")
+@SerialName("4_pick")
 val fourthPick: Int, // How many times picked in fourth round?
 
-@SerializedName("4_win")
+@SerialName("4_win")
 val fourthWin: Int, // How many times picked in fourth round and won?
 
-@SerializedName("5_pick")
+@SerialName("5_pick")
 val fifthPick: Int, // How many times picked fifth?
 
-@SerializedName("5_win")
+@SerialName("5_win")
 val fifthWin: Int, // How many times picked fifth and won?
 
-@SerializedName("6_pick")
+@SerialName("6_pick")
 val sixthPick: Int, // How many times picked sixth?
 
-@SerializedName("6_win")
+@SerialName("6_win")
 val sixthWin: Int, // How many times picked sixth and won?
 
-@SerializedName("7_pick")
+@SerialName("7_pick")
 val seventhPick: Int, // How many times picked seventh?
 
-@SerializedName("7_win")
+@SerialName("7_win")
 val seventhWin: Int, // How many times picked seventh and won?
 
-@SerializedName("8_pick")
+@SerialName("8_pick")
 val eighthPick: Int, // How many times picked eighth round?
 
-@SerializedName("8_win")
+@SerialName("8_win")
 val eighthWin: Int, // How many times picked eighth and won?
 )
 
