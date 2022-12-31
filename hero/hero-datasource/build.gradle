@@ -2,9 +2,8 @@ plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.10'
+    id 'com.squareup.sqldelight'
 }
-
-
 
 
 java {
@@ -15,7 +14,15 @@ dependencies {
     implementation Ktor.core
     implementation Ktor.clientSerialization
     implementation Ktor.android
+    implementation SqlDelight.runtime
 
 
     implementation project(Modules.heroDomain)
+}
+
+sqldelight {
+    HeroDatabase {
+        packageName = "com.example.dero_datasource.cache"
+
+    }
 }
