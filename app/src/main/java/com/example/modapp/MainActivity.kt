@@ -23,6 +23,7 @@ import com.example.core.UiComponent
 import com.example.hero_domain.Hero
 import com.example.hero_interactors.HeroInteractors
 import com.example.modapp.ui.theme.ModAppTheme
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -37,7 +38,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        val getHeros = HeroInteractors.build().getHeros
+        val getHeros = HeroInteractors.build(
+            sqlDriver = AndroidSqliteDriver(
+                schema =HeroInteractors.schema,
+                context = this,
+                name = HeroInteractors.dbName
+            )
+        ).getHeros
         val logger = Logger(tag = "GetHerosTest")
         getHeros().onEach { dataState ->
             when (dataState) {

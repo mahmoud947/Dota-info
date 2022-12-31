@@ -64,6 +64,7 @@ dependencies {
     implementation(Compose.hiltNavigation)
 
     implementation(Google.material)
+    implementation(SqlDelight.androidDriver)
 
 
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
