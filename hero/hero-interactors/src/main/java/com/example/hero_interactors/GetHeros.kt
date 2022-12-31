@@ -3,6 +3,7 @@ package com.example.hero_interactors
 import com.example.core.DataState
 import com.example.core.ProgressBarState
 import com.example.core.UiComponent
+import com.example.hero_datasource.cache.HeroCache
 import com.example.hero_datasource.network.HeroService
 import com.example.hero_domain.Hero
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 
 class GetHeros(
     private val service: HeroService,
-    //TODO(Add caching)
+   private val cache: HeroCache
 ) {
     operator fun invoke(): Flow<DataState<List<Hero>>> = flow {
         try {
@@ -29,7 +30,9 @@ class GetHeros(
                 )
                 listOf()
             }
-            emit(DataState.Data(heros))
+            cache.insert(heros)
+            val cachedHeros = cache.selectAll()
+            emit(DataState.Data(cachedHeros))
         } catch (e: Exception) {
             e.printStackTrace()
             emit(
