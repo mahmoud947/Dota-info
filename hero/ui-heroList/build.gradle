@@ -75,6 +75,8 @@ dependencies {
     implementation Hilt.android
     kapt Hilt.compiler
 
+    implementation(Compose.composeViewModel)
+
 
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 }

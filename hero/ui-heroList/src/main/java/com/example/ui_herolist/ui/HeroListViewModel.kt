@@ -17,20 +17,21 @@ import javax.inject.Named
 @HiltViewModel
 class HeroListViewModel @Inject constructor(
     private val getHeroesInteractor: GetHeros,
-    @Named("heroListLogger") private val logger: Logger
+    @Named("heroListLogger")
+    private val logger: Logger,
 ) : ViewModel() {
 
-     val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
+    val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
 
 
     init {
-      onEvent(event = HeroListEvent.GetHeros)
+        onEvent(event = HeroListEvent.GetHeros)
     }
 
 
-    fun onEvent(event: HeroListEvent){
-        when(event){
-            is HeroListEvent.GetHeros->getHeros()
+    fun onEvent(event: HeroListEvent) {
+        when (event) {
+            is HeroListEvent.GetHeros -> getHeros()
         }
     }
 
