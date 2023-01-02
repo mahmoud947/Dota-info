@@ -51,7 +51,7 @@ val Typography = Typography(
     subtitle1 = TextStyle(
         fontFamily = QuickSand,
         fontWeight = FontWeight.W500,
-        fontSize = 15.sp,
+        fontSize = 12.sp,
     ),
     subtitle2 = TextStyle(
         fontFamily = QuickSand,

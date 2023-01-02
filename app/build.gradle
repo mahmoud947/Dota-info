@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
+
 }
 
 android {
@@ -46,10 +49,15 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes true
+}
+
 dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.heroDomain))
     implementation(project(Modules.heroInteractors))
+    implementation(project(Modules.ui_heroList))
 
 
     implementation(AndroidX.coreKtx)
@@ -65,6 +73,11 @@ dependencies {
 
     implementation(Google.material)
     implementation(SqlDelight.androidDriver)
+    implementation(Coil.coil)
+
+    implementation Hilt.android
+    kapt Hilt.compiler
+
 
 
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
