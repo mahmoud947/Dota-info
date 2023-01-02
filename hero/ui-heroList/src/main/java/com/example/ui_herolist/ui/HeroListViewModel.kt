@@ -24,8 +24,16 @@ class HeroListViewModel @Inject constructor(
 
 
     init {
-        getHeros()
+      onEvent(event = HeroListEvent.GetHeros)
     }
+
+
+    fun onEvent(event: HeroListEvent){
+        when(event){
+            is HeroListEvent.GetHeros->getHeros()
+        }
+    }
+
 
     private fun getHeros() {
         getHeroesInteractor().onEach { dataState ->
