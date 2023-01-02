@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -48,8 +49,10 @@ android {
 
 dependencies {
     implementation(project(Modules.heroInteractors))
+    implementation(project(Modules.core))
+    implementation(project(Modules.heroDomain))
 
-    
+
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.lifecycleVmKtx)
@@ -62,6 +65,9 @@ dependencies {
     implementation(Compose.hiltNavigation)
 
     implementation(Google.material)
+
+    implementation Hilt.android
+    kapt Hilt.compiler
 
 
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"

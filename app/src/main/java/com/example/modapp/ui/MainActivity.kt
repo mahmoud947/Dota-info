@@ -14,6 +14,7 @@ import coil.ImageLoader
 import com.example.modapp.ui.navigation.Screen
 import com.example.modapp.ui.theme.ModAppTheme
 import com.example.ui_herodetail.HeroDetail
+import com.example.ui_herodetail.ui.HeroDetailViewModel
 import com.example.ui_herolist.HeroList
 import com.example.ui_herolist.ui.HeroListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,6 +74,9 @@ fun NavGraphBuilder.addHeroDetail() {
         route = Screen.HeroDetail.route + "/{heroId}",
         arguments = Screen.HeroDetail.arguments
     ) {
-        HeroDetail(heroId = it.arguments?.getInt("heroId"))
+        val viewModel:HeroDetailViewModel = hiltViewModel()
+        HeroDetail(
+            heroDetailState = viewModel.state.value
+        )
     }
 }
