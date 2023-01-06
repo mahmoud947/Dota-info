@@ -63,7 +63,7 @@ dependencies {
     implementation(Compose.tooling)
     implementation(Compose.navigation)
     implementation(Compose.hiltNavigation)
-
+    implementation(Coil.coil)
     implementation(Google.material)
 
     implementation Hilt.android

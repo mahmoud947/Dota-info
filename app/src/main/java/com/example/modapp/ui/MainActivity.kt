@@ -13,7 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
 import com.example.modapp.ui.navigation.Screen
 import com.example.modapp.ui.theme.ModAppTheme
-import com.example.ui_herodetail.HeroDetail
+import com.example.ui_herodetail.ui.HeroDetail
+
 import com.example.ui_herodetail.ui.HeroDetailViewModel
 import com.example.ui_herolist.HeroList
 import com.example.ui_herolist.ui.HeroListViewModel
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         imageLoader = imageLoader
                     )
-                    addHeroDetail()
+                    addHeroDetail(imageLoader = imageLoader)
                 }
 
             }
@@ -69,14 +70,16 @@ fun NavGraphBuilder.addHeroList(
     }
 }
 
-fun NavGraphBuilder.addHeroDetail() {
+fun NavGraphBuilder.addHeroDetail(imageLoader: ImageLoader) {
     composable(
         route = Screen.HeroDetail.route + "/{heroId}",
         arguments = Screen.HeroDetail.arguments
     ) {
-        val viewModel:HeroDetailViewModel = hiltViewModel()
+        val viewModel: HeroDetailViewModel = hiltViewModel()
         HeroDetail(
-            heroDetailState = viewModel.state.value
+            state = viewModel.state.value,
+            imageLoader = imageLoader
+
         )
     }
 }
