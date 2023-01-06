@@ -1,8 +1,8 @@
 package com.example.hero_interactors
 
-import com.example.core.DataState
-import com.example.core.ProgressBarState
-import com.example.core.UiComponent
+import com.example.core.domain.DataState
+import com.example.core.domain.ProgressBarState
+import com.example.core.domain.UiComponent
 import com.example.hero_datasource.cache.HeroCache
 import com.example.hero_domain.Hero
 import kotlinx.coroutines.flow.Flow

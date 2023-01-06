@@ -4,26 +4,26 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.DataState
-import com.example.core.Logger
-import com.example.core.UiComponent
-import com.example.hero_domain.Hero
+import com.example.core.domain.DataState
+import com.example.core.domain.UiComponent
+import com.example.core.util.Logger
+import com.example.hero_interactors.FilterHeroes
 import com.example.hero_interactors.GetHeros
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
 class HeroListViewModel @Inject constructor(
     private val getHeroesInteractor: GetHeros,
+    private val filterHeroesInteractor: FilterHeroes,
     @Named("heroListLogger")
     private val logger: Logger,
 ) : ViewModel() {
 
     val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
-
+    val searchQuery = MutableStateFlow("")
 
     init {
         onEvent(event = HeroListEvent.GetHeros)
@@ -39,14 +39,21 @@ class HeroListViewModel @Inject constructor(
     }
 
     private fun filterHeroes() {
-       val filteredHeroes:MutableList<Hero> = state.value.heros.filter { hero ->
-           hero.localizedName.trim().lowercase().contains(state.value.heroName.lowercase())
-       }.toMutableList()
-        state.value = state.value.copy(filteredHeroList = filteredHeroes)
+        filterHeroesInteractor(
+            current = state.value.heros,
+            heroName = searchQuery,
+            heroFilter = state.value.heroFilter,
+            attribute = state.value.primaryAttribute
+        ).onEach {
+            state.value = state.value.copy(filteredHeroList = it)
+        }.launchIn(viewModelScope)
+
     }
 
     private fun onHeroNameChange(heroName: String) {
-        state.value= state.value.copy(heroName = heroName)
+        state.value = state.value.copy(heroName = heroName)
+        searchQuery.value = heroName
+
     }
 
 
