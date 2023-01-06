@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.DataState
 import com.example.core.Logger
 import com.example.core.UiComponent
+import com.example.hero_domain.Hero
 import com.example.hero_interactors.GetHeros
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -32,7 +33,20 @@ class HeroListViewModel @Inject constructor(
     fun onEvent(event: HeroListEvent) {
         when (event) {
             is HeroListEvent.GetHeros -> getHeros()
+            is HeroListEvent.OnHeroNameChange -> onHeroNameChange(event.heroName)
+            is HeroListEvent.FilterHeroes -> filterHeroes()
         }
+    }
+
+    private fun filterHeroes() {
+       val filteredHeroes:MutableList<Hero> = state.value.heros.filter { hero ->
+           hero.localizedName.trim().lowercase().contains(state.value.heroName.lowercase())
+       }.toMutableList()
+        state.value = state.value.copy(filteredHeroList = filteredHeroes)
+    }
+
+    private fun onHeroNameChange(heroName: String) {
+        state.value= state.value.copy(heroName = heroName)
     }
 
 
@@ -52,6 +66,7 @@ class HeroListViewModel @Inject constructor(
                 }
                 is DataState.Data -> {
                     state.value = state.value.copy(heros = dataState.data ?: listOf())
+                    filterHeroes()
                 }
                 is DataState.Loading -> {
                     state.value = state.value.copy(

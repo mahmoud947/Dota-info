@@ -6,4 +6,6 @@ import com.example.hero_domain.Hero
 data class HeroListState(
     val progressBarState: ProgressBarState = ProgressBarState.Idle,
     val heros:List<Hero> = emptyList(),
+    val heroName:String = "",
+    val filteredHeroList:List<Hero> = emptyList()
 )
