@@ -74,6 +74,7 @@ fun HeroDetail(
                                     .align(Alignment.CenterVertically)
                                     .padding(end = 8.dp),
                                 text = hero.localizedName,
+                                color = MaterialTheme.colors.onBackground,
                                 style = MaterialTheme.typography.h1,
                             )
                             val iconPainter = rememberImagePainter(
@@ -97,12 +98,14 @@ fun HeroDetail(
                             modifier = Modifier
                                 .padding(bottom = 4.dp),
                             text = hero.primaryAttribute.uiValue,
+                            color = MaterialTheme.colors.onBackground,
                             style = MaterialTheme.typography.subtitle1,
                         )
                         Text(
                             modifier = Modifier
                                 .padding(bottom = 12.dp),
                             text = hero.attackType.uiValue,
+                            color = MaterialTheme.colors.onBackground,
                             style = MaterialTheme.typography.caption,
                         )
                         HeroBaseStats(

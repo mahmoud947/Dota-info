@@ -15,11 +15,10 @@ object CoilModule {
 
     @Provides
     @Singleton
-    fun provideImageLoader(app:Application):ImageLoader=
-    ImageLoader.Builder(app)
-    .error(R.drawable.error_image)
-    .placeholder(R.drawable.white_background)
-    .availableMemoryPercentage(.25)
-    .crossfade(true)
-    .build()
+    fun provideImageLoader(app: Application): ImageLoader =
+        ImageLoader.Builder(app)
+            .error(R.drawable.error_image)
+            .placeholder(R.drawable.white_background)
+            .crossfade(true)
+            .build()
 }

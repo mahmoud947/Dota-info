@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.core.domain.DataState
 import com.example.core.domain.UiComponent
 import com.example.core.util.Logger
+import com.example.hero_domain.HeroFilter
 import com.example.hero_interactors.FilterHeroes
 import com.example.hero_interactors.GetHeros
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +24,6 @@ class HeroListViewModel @Inject constructor(
 ) : ViewModel() {
 
     val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
-    val searchQuery = MutableStateFlow("")
 
     init {
         onEvent(event = HeroListEvent.GetHeros)
@@ -32,16 +32,22 @@ class HeroListViewModel @Inject constructor(
 
     fun onEvent(event: HeroListEvent) {
         when (event) {
-            is HeroListEvent.GetHeros -> getHeros()
+            is HeroListEvent.GetHeros -> getHeroes()
             is HeroListEvent.OnHeroNameChange -> onHeroNameChange(event.heroName)
             is HeroListEvent.FilterHeroes -> filterHeroes()
+            is HeroListEvent.OnUpdateHeroFilter -> updateHeroFilter(event.heroFilter)
         }
+    }
+
+    private fun updateHeroFilter(heroFilter: HeroFilter) {
+        state.value =state.value.copy(heroFilter = heroFilter)
+        filterHeroes()
     }
 
     private fun filterHeroes() {
         filterHeroesInteractor(
-            current = state.value.heros,
-            heroName = searchQuery,
+            current = state.value.heroes,
+            heroName = state.value.heroName,
             heroFilter = state.value.heroFilter,
             attribute = state.value.primaryAttribute
         ).onEach {
@@ -52,12 +58,10 @@ class HeroListViewModel @Inject constructor(
 
     private fun onHeroNameChange(heroName: String) {
         state.value = state.value.copy(heroName = heroName)
-        searchQuery.value = heroName
-
     }
 
 
-    private fun getHeros() {
+    private fun getHeroes() {
         getHeroesInteractor().onEach { dataState ->
             when (dataState) {
                 is DataState.Response -> {
@@ -72,7 +76,7 @@ class HeroListViewModel @Inject constructor(
 
                 }
                 is DataState.Data -> {
-                    state.value = state.value.copy(heros = dataState.data ?: listOf())
+                    state.value = state.value.copy(heroes = dataState.data ?: listOf())
                     filterHeroes()
                 }
                 is DataState.Loading -> {

@@ -7,9 +7,10 @@ import com.example.hero_domain.HeroFilter
 
 data class HeroListState(
     val progressBarState: ProgressBarState = ProgressBarState.Idle,
-    val heros:List<Hero> = emptyList(),
-    val heroName:String = "",
+    val heroes:List<Hero> = emptyList(),
     val filteredHeroList:List<Hero> = emptyList(),
+    val heroName:String = "",
     val heroFilter: HeroFilter = HeroFilter.Hero(),
     val primaryAttribute: HeroAttribute = HeroAttribute.Unknown
 )
+
